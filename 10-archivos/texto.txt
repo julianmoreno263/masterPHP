@@ -1,0 +1,2 @@
+hola, soy un archivo de texto plano!, que tal?
+Bien graciasSoy un texto metido desde phpSoy un texto metido desde php <br>Soy un texto metido desde phpSoy un texto metido desde phpSoy un texto metido desde phpSoy un texto metido desde php***Soy un texto metido desde php***<br>***Soy un texto metido desde php***<br>***Soy un texto metido desde php***<br>***Soy un texto metido desde php***<br>***Soy un texto metido desde php***

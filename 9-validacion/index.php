@@ -12,12 +12,33 @@
 
 <?php 
     
+    //codigo para mostrar los errores en pantalla
     if (isset($_GET["error"])) {
         # code...
         $error=$_GET["error"];
 
         if($error=="faltan valores"){
             echo "<strong style='color:red'>Introduce todos los datos en los campos</strong>";
+        }
+
+        if($error=="nombre"){
+            echo "<strong style='color:red'>Nombre invalido</strong>";
+        }
+
+        if($error=="apellido"){
+            echo "<strong style='color:red'>Apellido invalido</strong>";
+        }
+
+        if($error=="edad"){
+            echo "<strong style='color:red'>Edad invalida</strong>";
+        }
+
+        if($error=="email"){
+            echo "<strong style='color:red'>Email invalido</strong>";
+        }
+
+        if($error=="password"){
+            echo "<strong style='color:red'>Password invalido</strong>";
         }
     }
 ?>
