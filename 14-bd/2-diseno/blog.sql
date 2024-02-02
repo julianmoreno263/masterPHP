@@ -6,7 +6,7 @@ CREATE TABLE usuarios(
     nombre VARCHAR(100) NOT NULL,
     apellidos VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    pass VARCHAR(255) NOT NULL,
     fecha DATE NOT NULL,
     CONSTRAINT pk_usuarios PRIMARY KEY(id),
     CONSTRAINT uq_email UNIQUE(email)
@@ -27,8 +27,8 @@ CREATE TABLE entradas(
     fecha DATE NOT NULL,
     CONSTRAINT pk_entradas PRIMARY KEY(id),
     CONSTRAINT fk_entrada_usuario FOREIGN KEY(usuario_id) REFERENCES usuarios(id),
-    CONSTRAINT fk_entrada_categoria FOREIGN KEY(categoria_id) REFERENCES categorias(id)
+    CONSTRAINT fk_entrada_categoria FOREIGN KEY(categoria_id) REFERENCES categorias(id) ON DELETE CASCADE
 )ENGINE=INNODB;
 
 
-DESC entradas;
+DESC entradas;#describir la tabla, muestra la tabla visualmente
