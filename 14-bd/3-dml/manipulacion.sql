@@ -95,6 +95,22 @@ select email,SYSDATE() as fechaActual from usuarios;
 #mostrar la fecha con otro formato,por ejemplo mostrarla como dia-mes-year.
 select email,DATE_FORMAT(fecha,'%d-%m-%Y') as fechaActual from usuarios;
 
+#funciones generales en SQL
+
+#comprobar si hay registros nulos en un campo,sale 0 si es false y 1 si es true
+SELECT email, ISNULL(apellidos) from usuarios;
+
+#comprobar si dos strings son iguales o diferentes. STRCMP() devuelve 0 si las cadenas son iguales, -1 si el primer argumento es menor que el segundo, según el orden de ordenamiento de cadenas actual, y 1 en otro caso
+select email,STRCMP('email1@email.com','email1@email.com') from usuarios;
+
+#ver la version de mysql,se debe hacer desde una consulta
+select VERSION() from usuarios;
+
+#ver el usuario de la bd
+select USER() from usuarios;
+
+#con ifnull puedo ver si un campo tiene registros vacios, y puedo pasar un string por DEFAULT
+select ifnull(apellidos,'este campo esta vacio') from usuarios;
 
 
 
