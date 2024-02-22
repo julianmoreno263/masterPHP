@@ -104,6 +104,8 @@ insert into encargos values(null,1,1,2,CURDATE());
 insert into encargos values(null,2,2,4,CURDATE());
 insert into encargos values(null,3,3,1,CURDATE());
 insert into encargos values(null,4,3,3,CURDATE());
+insert into encargos values(null,4,4,3,CURDATE());
+
 insert into encargos values(null,5,5,1,CURDATE());
 insert into encargos values(null,6,6,1,CURDATE());
 

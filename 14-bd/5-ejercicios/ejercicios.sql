@@ -42,3 +42,28 @@ select co.modelo as 'coche',cl.nombre as 'cliente', sum(cantidad) as 'unidades' 
 inner join coches co on co.id=e.coche_id
 inner join clientes cl on cl.id=e.cliente_id
 group by e.coche_id, e.cliente_id;
+
+#14-mostrar los clientes que mas encargos han echo y mostrar cuantos encargos hicieron. Cuando ponemos order by 2 por ejemplo,queremos decir que vamos a ordenar por la columna 2 que estamos mostrando,en este caso la columna 1 sera cliente_id y la 2 sera el id del encargo.
+select c.nombre, count(e.id) from encargos e
+inner join clientes c on c.id=e.cliente_id
+group by cliente_id order by 2 desc limit 2;
+
+#15-obtener listado de clientes atendidos por el vendedor 'David Lopez',para esto hacemos una subconsulta
+select * from clientes where vendedor_id in (select id from vendedores where nombre='David' and apellidos='Lopez');
+
+#16-obtener un listado con los encargos realizados por el cliente 'fruteria antonia'
+select e.id as 'numero encargo', cantidad,c.nombre,co.modelo,e.fecha from encargos e 
+inner join clientes c on c.id=cliente_id
+inner join coches co on co.id=e.coche_id
+where e.cliente_id in (select id from clientes where nombre='fruteria antonia');
+
+#17-mostrar los clientes que han echo algun encargo del coche 'ranchera'
+select * from clientes where id in (select cliente_id from encargos where coche_id IN
+(select id from coches where modelo like '%ranchera%'));
+
+#18-obtener los vendedores con 2 o mas clientes
+select * from vendedores where id in (select vendedor_id from clientes group by vendedor_id having count(id)>=2);
+
+#19-seleccionar el grupo en el que trabaja el vendedor con mayor salario y mostrar el nombre del grupo. El 'in' antes de las subconsultas significa 'existe', osea podemos traducirlo por ejemplo como 'donde el id existe en la subconsulta...'
+select * from grupos where id in (select grupo_id from vendedores
+where sueldo=(select max(sueldo) from vendedores));
