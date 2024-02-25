@@ -67,3 +67,59 @@ select * from vendedores where id in (select vendedor_id from clientes group by 
 #19-seleccionar el grupo en el que trabaja el vendedor con mayor salario y mostrar el nombre del grupo. El 'in' antes de las subconsultas significa 'existe', osea podemos traducirlo por ejemplo como 'donde el id existe en la subconsulta...'
 select * from grupos where id in (select grupo_id from vendedores
 where sueldo=(select max(sueldo) from vendedores));
+
+#20-obtener los nombres y ciudades de los clientes con encargos de 3 unidades en adelante
+select nombre, ciudad from clientes where id in (select cliente_id from encargos where cantidad>=3);
+
+#21-mostrar listado de clientes mostrando el numero de cliente y el nombre y tambien el numero del vendedor y su nombre
+select c.id, c.nombre,v.id,concat(v.nombre, ' ', v.apellidos) as vendedor from clientes c,vendedores v
+where c.vendedor_id=v.id;
+
+#22-listar todos los encargos realizados con la marca del coche y el nombre del cliente(lo hice de dos formas)
+/* select co.marca,c.nombre from encargos e,coches co, clientes c 
+where e.coche_id=co.id and e.cliente_id=c.id; */
+
+select e.id,co.marca,c.nombre from encargos e
+inner join coches co on co.id=e.coche_id
+inner join clientes c on c.id=e.cliente_id;
+
+#23-listar los encargos con el nombre del coche, nombre del cliente y el nombre de la ciudad, pero solo de barcelona
+select e.id,co.modelo,c.nombre,c.ciudad from encargos e
+inner join coches co on co.id=e.coche_id
+inner join clientes c on c.id=e.cliente_id
+where c.ciudad='barcelona';
+
+#24-obtener una lista de los nombres de los clientes con el importe de sus encargos acumulados
+select c.nombre,sum(precio*cantidad) as importe from clientes c
+inner join encargos e on c.id=e.cliente_id
+inner join coches co on e.coche_id=co.id
+group by c.nombre
+order by 2;
+
+#25-sacar vendedores que tiene jefe y mostrar el nombre del jefe
+select v1.nombre as vendedor,v2.nombre as jefe from vendedores v1
+inner join vendedores v2 on v1.jefe=v2.id;
+
+#26-ver los nombres de los clientes y la cantidad de encargos realizados incluyendo los que no han realizado encargos
+select c.nombre,e.cantidad from clientes c
+left join encargos e on c.id=e.cliente_id
+group by 1;
+
+#27-listar todos los vendedores y el numero de clientes de cada vendedor tengan o no clientes
+select v.nombre,v.apellidos,count(c.id) as 'numero clientes' from vendedores v
+left join clientes c on c.vendedor_id=v.id
+group by v.id;
+
+#28-crear una vista llamada 'vendedoresA' que muestre todos los vendedores del grupo llamado 'vendedores A'
+create view vendedoresA as select * from vendedores 
+where grupo_id in (select id from grupos where nombre='vendedores A');
+
+select * from vendedoresA;
+
+
+#29-mostrar los datos del vendedor con mas antiguedad en el consecionario
+select * from vendedores ORDER BY fechaAlta ASC LIMIT 1;
+
+#30-obtener el coche con mas unidades vendidas
+select * from coches where id=(select coche_id from encargos order by cantidad desc limit 1);
+
