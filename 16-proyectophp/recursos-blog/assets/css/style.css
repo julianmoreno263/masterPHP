@@ -1,4 +1,4 @@
-/*FUENTES*/
+/*FUENTES - asi cargamos una fuente externa,osea que la hayamos descargado de internet*/
 @font-face{
     font-family: "fajala";
     src: url(../fonts/fuente.ttf) format('truetype');
@@ -259,4 +259,4 @@ input[type="submit"],
     height: auto;
     padding: 15px;
     text-align: center;
-}
+} 
