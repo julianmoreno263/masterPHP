@@ -12,11 +12,11 @@ if (isset($_POST)) {
         session_start();
     }
 
-    # capturar los valores del formulario y ademas estamos evaluando si tiene algo
-    $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : false;
-    $apellidos=isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
-    $email=isset($_POST['email']) ? $_POST['email'] : false;
-    $password=isset($_POST['password']) ? $_POST['password'] : false;
+    # capturar los valores del formulario y ademas estamos evaluando si tiene algo, con mysqli_real_escape_string lo que hago es escapar caracteres en los campos del formulario para evitar vulnerabilidades, escapar significa que con esta funcion todo lo que se coloque en los campos del formulario se interpreta como texto,como strings, asi esos caracteres no los pueden utilizar para hacer inyeccion de codigo malicioso a traves del formulario.
+    $nombre=isset($_POST['nombre']) ? mysqli_real_escape_string($db,$_POST['nombre']): false;
+    $apellidos=isset($_POST['apellidos']) ? mysqli_real_escape_string($db,$_POST['apellidos']) : false;
+    $email=isset($_POST['email']) ? mysqli_real_escape_string($db,trim($_POST['email']) ): false;
+    $password=isset($_POST['password']) ? mysqli_real_escape_string($db,$_POST['password']) : false;
 
     //array de errores
     $errores=array();
