@@ -4,7 +4,7 @@
 $servidor='localhost';
 $usuario='root';
 $password='';
-$basedatos='blog';
+$basedatos='blogmaster';
 
 $db=mysqli_connect($servidor,$usuario,$password,$basedatos);
 

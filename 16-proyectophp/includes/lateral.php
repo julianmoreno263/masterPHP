@@ -1,4 +1,3 @@
-<?php require_once('includes/helpers.php'); ?>
 
 <!-- Sidebar -->
 <aside id="sidebar">
@@ -8,8 +7,9 @@
             <h3>Bienvenid@! <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellidos'] ; ?></h3>
             <!-- botones -->
             <a href="cerrar.php" class="boton boton-verde">Crear Entradas</a>
+            <a href="cerrar.php" class="boton">Crear Categoria</a>
             <a href="cerrar.php" class="boton boton-naranja">Mis Datos</a>
-            <a href="cerrar.php" class="boton">Cerrar Sesion</a>
+            <a href="cerrar.php" class="boton boton-rojo">Cerrar Sesion</a>
         </div>
     <?php endif; ?>
 

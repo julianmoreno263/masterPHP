@@ -123,3 +123,5 @@ select * from vendedores ORDER BY fechaAlta ASC LIMIT 1;
 #30-obtener el coche con mas unidades vendidas
 select * from coches where id=(select coche_id from encargos order by cantidad desc limit 1);
 
+
+

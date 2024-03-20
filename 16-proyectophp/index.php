@@ -25,20 +25,28 @@
         <div id="principal">
             <h1>Ultimas Entradas</h1>
 
-            <article class="entrada">
-                <h2>Titulo de mi entrada</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat sem rutrum volutpat cursus. </p>
-            </article>
+            <?php 
+                $entradas=conseguirUltimasEntradas($db);
+                if(!empty($entradas)):
+                    while($entrada=mysqli_fetch_assoc($entradas)):
+            ?>
 
-            <article class="entrada">
-                <h2>Titulo de mi entrada</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat sem rutrum volutpat cursus. </p>
-            </article>
+                <article class="entrada">
+                    <a href="">
+                        <h2><?=$entrada['titulo']?></h2>
+                        <p><?=substr($entrada['descripcion'],0,160) . '...'?> </p>
+                    </a>
+                </article>
 
-            <article class="entrada">
-                <h2>Titulo de mi entrada</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat sem rutrum volutpat cursus. </p>
-            </article>
+            <?php 
+                    endwhile;
+                endif;
+            ?>
+
+            <div id="ver-todas">
+                <a href="">Ver todas las entradas</a>
+            </div>
+
         </div>
 
     </div>
