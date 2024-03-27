@@ -44,7 +44,7 @@ function conseguirCategorias($conexion){
 
 function conseguirUltimasEntradas($conexion){
 
-    $sql='select e.*,c.* from entradas e '
+    $sql='select e.*,c.nombre as "categoria" from entradas e '
          . ' inner join categorias c on e.categoria_id=c.id ' 
          . ' order by e.id desc limit 4';
 

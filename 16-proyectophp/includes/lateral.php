@@ -7,12 +7,14 @@
             <h3>Bienvenid@! <?= $_SESSION['usuario']['nombre'] . ' ' . $_SESSION['usuario']['apellidos'] ; ?></h3>
             <!-- botones -->
             <a href="cerrar.php" class="boton boton-verde">Crear Entradas</a>
-            <a href="cerrar.php" class="boton">Crear Categoria</a>
+            <a href="crearCategoria.php" class="boton">Crear Categoria</a>
             <a href="cerrar.php" class="boton boton-naranja">Mis Datos</a>
             <a href="cerrar.php" class="boton boton-rojo">Cerrar Sesion</a>
         </div>
     <?php endif; ?>
 
+
+    <?php if(!isset($_SESSION['usuario'])): ?>
 
         <div id="login" class="bloque">
             <h3>Identificate</h3>
@@ -76,4 +78,5 @@
 
             <?php borrarErrores(); ?>
         </div>
+        <?php endif; ?>
     </aside>
