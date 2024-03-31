@@ -18,7 +18,7 @@ function borrarErrores(){
     if (isset($_SESSION['errores'])) {
         # code...
         $_SESSION['errores']=null;
-        $borrado=session_unset();
+        $borrado=true;
     }
 
     if (isset($_SESSION['errores_entrada'])) {
@@ -30,7 +30,7 @@ function borrarErrores(){
     if (isset($_SESSION['completado'])) {
         # code...
         $_SESSION['completado']=null;
-        session_unset();
+        $borrado=true;
     }
 
     return $borrado;
@@ -48,11 +48,16 @@ function conseguirCategorias($conexion){
     return $resultado;
 }
 
-function conseguirUltimasEntradas($conexion){
+function conseguirEntradas($conexion,$limit=null){
 
     $sql='select e.*,c.nombre as "categoria" from entradas e '
          . ' inner join categorias c on e.categoria_id=c.id ' 
-         . ' order by e.id desc limit 4';
+         . ' order by e.id desc';
+
+    if ($limit) {
+        # esto es equivalente a hacer esto: $sql=$sql . "LIMIT 4";
+        $sql.="LIMIT 4";
+    }
 
     $entradas=mysqli_query($conexion,$sql);
     $resultado=array();
@@ -63,8 +68,5 @@ function conseguirUltimasEntradas($conexion){
 
     return $resultado;
 }
-
-
-
 
 ?>
