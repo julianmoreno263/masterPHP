@@ -11,8 +11,19 @@
 </head>
 <body>
 
+    
     <!-- Cabecera -->
     <?php require_once('includes/cabecera.php') ?>
+
+    <?php require_once('includes/helpers.php') ?>
+
+    <?php 
+        $categoria_actual=conseguirCategoria($db,$_GET['id']); 
+        if (!isset($categoria_actual['id'])) {
+            # code...
+            header("Location:index.php");
+        }
+    ?>
 
 
     <div id="contenedor">
@@ -23,11 +34,13 @@
 
         <!-- Contenido principal -->
         <div id="principal">
-            <h1>Ultimas Entradas</h1>
+
+            <h1>Entradas de <?=$categoria_actual['nombre']?></h1>
 
             <?php 
-                $entradas=conseguirEntradas($db,true);
-                if(!empty($entradas)):
+                $entradas=conseguirEntradas($db,null,$_GET['id']);
+
+                if(!empty($entradas) && mysqli_num_rows($entradas)>=1):
                     while($entrada=mysqli_fetch_assoc($entradas)):
             ?>
 
@@ -40,13 +53,11 @@
                 </article>
 
             <?php 
-                    endwhile;
-                endif;
+                endwhile;
+                else:
             ?>
-
-            <div id="ver-todas">
-                <a href="entradas.php">Ver todas las entradas</a>
-            </div>
+            <div class="alerta">No hay entradas en esta categoria</div>
+            <?php endif; ?>
 
         </div>
 

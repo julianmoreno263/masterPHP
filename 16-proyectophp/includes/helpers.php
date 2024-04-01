@@ -39,7 +39,7 @@ function borrarErrores(){
 function conseguirCategorias($conexion){
     $sql='select * from categorias order by id asc';
     $categorias=mysqli_query($conexion,$sql);
-    $result=array();
+    $resultado=array();
 
     if ($categorias && mysqli_num_rows($categorias)>=1) {
         $resultado=$categorias;
@@ -48,11 +48,43 @@ function conseguirCategorias($conexion){
     return $resultado;
 }
 
-function conseguirEntradas($conexion,$limit=null){
+function conseguirCategoria($conexion,$id){
+    $sql="select * from categorias where id=$id";
+    $categorias=mysqli_query($conexion,$sql);
+    $resultado=array();
+
+    if ($categorias && mysqli_num_rows($categorias)>=1) {
+        $resultado=mysqli_fetch_assoc($categorias);
+    }
+
+    return $resultado;
+}
+
+function conseguirEntrada($conexion,$id){
+    $sql="select e.*, c.nombre as 'categoria' from entradas e " .
+         " inner join categorias c on e.categoria_id=c.id " .
+         " where e.id=$id ";
+    $entrada=mysqli_query($conexion,$sql);
+    $resultado=array();
+
+    if ($entrada && mysqli_num_rows($entrada)>=1) {
+        $resultado=mysqli_fetch_assoc($entrada);
+    }
+
+    return $resultado;
+}
+
+function conseguirEntradas($conexion,$limit=null,$categoria=null){
 
     $sql='select e.*,c.nombre as "categoria" from entradas e '
-         . ' inner join categorias c on e.categoria_id=c.id ' 
-         . ' order by e.id desc';
+         . ' inner join categorias c on e.categoria_id=c.id ';
+
+    if (!empty($categoria)) {
+        # code...
+        $sql .="where e.categoria_id=$categoria ";
+    }
+
+    $sql.=' order by e.id desc';
 
     if ($limit) {
         # esto es equivalente a hacer esto: $sql=$sql . "LIMIT 4";
