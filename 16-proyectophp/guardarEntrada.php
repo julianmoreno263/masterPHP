@@ -31,13 +31,26 @@ if (isset($_POST)) {
     }
 
     if (!$errores) {
-        $sql="insert into entradas values(null,$usuario,$categoria,'$titulo','$descripcion',CURDATE())";
+        if(isset($_GET['editar'])){
+            $entrada_id=$_GET['editar'];
+            $usuario_id=$_SESSION['usuario']['id'];
+
+            $sql="update entradas set titulo='$titulo',descripcion='$descripcion',categoria_id=$categoria " .
+            " where id=$entrada_id and usuario_id=$usuario_id";
+        }else{
+            $sql="insert into entradas values(null,$usuario,$categoria,'$titulo','$descripcion',CURDATE())";
+        }
         $guardar= mysqli_query($db,$sql);
 
-        header('Location:index.php');
+        header('Location:entrada.php?id=' . $_GET['editar']);
+
     }else{
         $_SESSION['errores_entrada']=$errores;
-        header('Location:crearEntradas.php');
+        if (isset($_GET['editar'])) {
+            header('Location:editarEntrada.php?id=' . $_GET['editar']);
+        }else{
+            header('Location:crearEntradas.php');
+        }
     }
 }
 
