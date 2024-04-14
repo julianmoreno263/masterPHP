@@ -76,7 +76,7 @@ function conseguirEntrada($conexion,$id){
     return $resultado;
 }
 
-function conseguirEntradas($conexion,$limit=null,$categoria=null){
+function conseguirEntradas($conexion,$limit=null,$categoria=null,$busqueda=null){
 
     $sql='select e.*,c.nombre as "categoria" from entradas e '
          . ' inner join categorias c on e.categoria_id=c.id ';
@@ -85,6 +85,12 @@ function conseguirEntradas($conexion,$limit=null,$categoria=null){
         # code...
         $sql .="where e.categoria_id=$categoria ";
     }
+
+    if (!empty($busqueda)) {
+        # code...
+        $sql .="where e.titulo like '%$busqueda%'";
+    }
+
 
     $sql.=' order by e.id desc';
 
