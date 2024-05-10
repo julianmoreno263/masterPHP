@@ -4,6 +4,8 @@
 
 //si despues del new hay mas codigo, se ejecuta ese codigo y cuando php vea que ya se ejecuto todo y no se ha llamado mas al objeto entra a trabajar el destructor y lo elimina.Por ejemplo siu creamos un bucle despues del new este codigo se ejecutara, y despues de terminar se ejecuta el destructor.El destructor detecta cuando un objeto ya no se va a ejecutar y lo elimina.
 
+//nota: php tiene varios metodos magicos(los que comienzan con doble guion bajo __), entre ellos esta el metodo __toString(), con este metodo podemos imprimir un objeto como si fuera un string, si por ejemplo queremos imprimir con un echo el objeto $usuario nos da un error que dice que no se puede imprimir en un string este objeto,pero si implementamos el metodo __toString() si lo permite.
+
 class Usuario{
 
     public $nombre;
@@ -11,7 +13,14 @@ class Usuario{
 
     //constructor
     public function __construct(){
+        $this->nombre="Julian Moreno";
+        $this->email="email@email.com";
+
         echo "<h2>Creando el objeto</h2> <br>";
+    }
+
+    public function __toString(){
+        return "Hola {$this->nombre}, estás registrado con el email {$this->email} <br>";
     }
 
     public function __destruct(){
@@ -27,5 +36,10 @@ for ($i=0; $i <= 10; $i++) {
     
     echo "{$i}"  . "<br>";
 }
+
+//con el metodo __toString() implementado ya podemos imprimir el objeto como un string
+echo $usuario;
+
+echo $usuario->email;
 
 ?>
