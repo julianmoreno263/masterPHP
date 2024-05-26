@@ -3,7 +3,9 @@
 
 //en este modulo veremos como instalar librerias con composer y como usarlas en nuestros proyectos php.Esta libreria convierte archivos html a pdf.
 
-//el composer lo instalamos en el pc globalmente y las librerias las instalamos en la carpeta donde vayamos a usarlas,entonces debemos pararnos en la carpeta correspondiente en consola.
+//el composer lo instalamos en el pc globalmente y las librerias las instalamos en la carpeta donde vayamos a usarlas,entonces debemos pararnos en la carpeta correspondiente en consola.Cuando instalamos una libreria con composer, esta nos aparece registrada en el archivo de composer.json que se crea al instalar composer.
+
+//podemos encontrar librerias de php en el sitio web de packagist en esta url https://packagist.org/
 
 
 require '../vendor/autoload.php';
