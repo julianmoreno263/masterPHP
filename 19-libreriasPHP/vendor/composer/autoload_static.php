@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e
 {
+    public static $files = array (
+        '0a80d26768cd24fcdbe75bdd719255c1' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
@@ -20,9 +24,26 @@ class ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPThumb\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/tests',
+            ),
+            'PHPThumb' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'FB' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+        'FirePHP' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
+        'FirePHP_TestWrapper' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP_TestWrapper.class.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
@@ -44,6 +65,7 @@ class ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitadff0ec286d45a3b95c396d77d9c6d2e::$classMap;
 
         }, null, ClassLoader::class);
