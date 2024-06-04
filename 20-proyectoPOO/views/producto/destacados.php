@@ -1,8 +1,4 @@
-
-
-    
-   
-        <h1>Productos Destacados</h1>
+<h1>Productos Destacados</h1>
         <div class="product">
             <img src="assets/img/camiseta.png" alt="imagen camiseta">
             <h2>Camiseta Azul Ancha</h2>
@@ -24,6 +20,3 @@
             <a href="#" class="button">Comprar</a>
         </div>
     </div>
-
-
-   

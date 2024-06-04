@@ -1,8 +1,12 @@
 
 <?php 
 
-require_once "autoload.php";
 
+//aqui en el index.php hago un require de los archivos del header.php.sidebar.php y footer.php para que siempe se esten viendo,si mi sitio tiene varias paginas tendra el mismo header,sidebar y footer.
+
+require_once "autoload.php";
+require_once "views/layouts/header.php";
+require_once "views/layouts/sidebar.php";
 
 
 if (isset($_GET['controller'])) {
@@ -28,6 +32,9 @@ if(class_exists($nombreControlador)){
 }else{
     echo "La página no existe";
 }
+
+
+require_once "views/layouts/footer.php";
 
 
 
