@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Online PHP</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?=base_url?>assets/css/style.css">
 </head>
 <body>
 
@@ -17,7 +17,7 @@
     <!-- cabecera -->
     <header id='header'>
         <div id="logo">
-            <img src="assets/img/camiseta.png" alt="logotipo">
+            <img src="<?=base_url?>assets/img/camiseta.png" alt="logotipo">
             <a href="index.php">Tienda de Camisetas</a>
         </div>
     </header>

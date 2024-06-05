@@ -1,0 +1,23 @@
+#este archivo es un archivo de tipo apache llamado .htaccess, con este archivo vamos a usar el #rewrite_module, este nos
+#ayudara a crear mejor las rutas de cada una de nuestras paginas del #sitio web, como no estamos
+#usando un framework lo hacemos de este modo, ese modulo rewrite_module lo podemos encontrar en #nuestro wamp server,
+#vamos a Apache-apache_modules y salen todos los modulos de apache, algunos estan activos y #otros no, por defecto ese
+#debe estar activo,si no lo esta lo activamos para poder trabajar con el.
+
+#para poder trabajar con este tipo de archivos en vscode y que no saque errores se instala el plugin Apache conf, y listo.
+
+<IfModule mod_rewrite.c>
+    #activar rewrite_module
+    RewriteEngine on
+    ErrorDocument 404 http://localhost/master%20php/20-proyectoPOO/error/
+
+    #condiciones, no se permitira cargar ni archivos ni carpetas en la url
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    RewriteCond %{SCRIPT_FILENAME} !-f
+
+    #reglas de reescritura,
+    #esto significa que en la ruta se podra colocar cualquier cosa que le llegue en $1 y
+    #cualquier cosa que le llegue en $2.
+    RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
+
+</IfModule>

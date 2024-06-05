@@ -5,16 +5,25 @@
 //aqui en el index.php hago un require de los archivos del header.php.sidebar.php y footer.php para que siempe se esten viendo,si mi sitio tiene varias paginas tendra el mismo header,sidebar y footer.
 
 require_once "autoload.php";
+require_once "config/parameters.php";
 require_once "views/layouts/header.php";
 require_once "views/layouts/sidebar.php";
 
 
+function showError(){
+    $error=new ErrorController();
+    $error->index();  
+}
+
 if (isset($_GET['controller'])) {
     $nombreControlador=$_GET['controller'] . 'Controller';
+}elseif(!isset($_GET['controller']) && isset($_GET['action'])){
+    $nombreControlador= controller_default;
 }else{
-    echo "La página no existe";
+    showError();  
     exit;
 }
+
 
 
 if(class_exists($nombreControlador)){
@@ -25,12 +34,14 @@ if(class_exists($nombreControlador)){
 
         $action=$_GET['action'];
         $controlador->$action();
+    }elseif(!isset($_GET['controller']) && isset($_GET['action'])){
+        $actionDefault=action_default;
+        $action->$actionDefault;
     }else{
-        echo "La página no existe";
+        showError();      
     }
-
 }else{
-    echo "La página no existe";
+    showError();  
 }
 
 
