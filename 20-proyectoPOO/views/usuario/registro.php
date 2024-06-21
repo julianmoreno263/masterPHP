@@ -10,16 +10,16 @@
 <form action="<?=base_url?>usuario/save" method="post">
 
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" id="" required>
+    <input type="text" name="nombre" id="nombre" required>
 
     <label for="apellidos">Apellidos</label>
-    <input type="text" name="apellidos" id="" required>
+    <input type="text" name="apellidos" id="apellidos" required>
 
     <label for="email">Email</label>
-    <input type="text" name="email" id="" required>
+    <input type="text" name="email" id="email" required>
 
     <label for="password">Password</label>
-    <input type="password" name="password" id="" required>
+    <input type="password" name="password" id="password" required>
 
     <input type="submit" value="Registrarse">
 

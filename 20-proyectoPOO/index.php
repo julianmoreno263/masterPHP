@@ -20,7 +20,7 @@ function showError(){
 
 if (isset($_GET['controller'])) {
     $nombreControlador=$_GET['controller'] . 'Controller';
-}elseif(!isset($_GET['controller']) && isset($_GET['action'])){
+}elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
     $nombreControlador= controller_default;
 }else{
     showError();  
@@ -37,9 +37,9 @@ if(class_exists($nombreControlador)){
 
         $action=$_GET['action'];
         $controlador->$action();
-    }elseif(!isset($_GET['controller']) && isset($_GET['action'])){
+    }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
         $actionDefault=action_default;
-        $action->$actionDefault;
+        $controlador->$actionDefault();
     }else{
         showError();      
     }
