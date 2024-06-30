@@ -36,8 +36,52 @@ class ProductoController{
 
         if (isset($_POST)) {
             
-            var_dump($_POST);
+            $nombre=isset($_POST['nombre']) ? $_POST['nombre'] : false;
+            $descripcion=isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+            $precio=isset($_POST['precio']) ? $_POST['precio'] : false;
+            $stock=isset($_POST['stock']) ? $_POST['stock'] : false;
+            $categoria=isset($_POST['categoria']) ? $_POST['categoria'] : false;
+            // $imagen=isset($_POST['imagen']) ? $_POST['imagen'] : false;
+
+            if ($nombre && $descripcion && $precio && $stock && $categoria) {
+                $producto=new Producto();
+                $producto->setNombre($nombre);
+                $producto->setDescripcion($descripcion);
+                $producto->setPrecio($precio);
+                $producto->setStock($stock);
+                $producto->setCategoria_id($categoria);
+
+                //guardar la imagen
+                $file=$_FILES['imagen'];
+                $filename=$_FILES['imagen']['name'];
+                $mimetype=$_FILES['imagen']['type'];
+
+                if ($mimetype=="image/jpg" || $mimetype=="image/jpeg" || $mimetype=="image/png" || $mimetype=="image/gif") {
+                    if (!is_dir('uploads/images')) {
+                        mkdir('uploads/images', 0777,true);
+                    }
+
+                    move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
+                    $producto->setImagen($filename);
+                }
+
+
+                $save=$producto->save();
+                if ($save) {
+                    $_SESSION['producto']='complete';
+                }else{
+                    $_SESSION['producto']='failed';
+                }
+
+            }else{
+                $_SESSION['producto']='failed';
+            }
+
+        }else{
+            $_SESSION['producto']='failed';
         }
+
+        header('Location:' . base_url . 'producto/gestion');
     }
 }
 
