@@ -52,21 +52,33 @@ class ProductoController{
                 $producto->setCategoria_id($categoria);
 
                 //guardar la imagen
-                $file=$_FILES['imagen'];
-                $filename=$_FILES['imagen']['name'];
-                $mimetype=$_FILES['imagen']['type'];
+                if (isset($_FILES['imagen'])) {
+                    
+                    $file=$_FILES['imagen'];
+                    $filename=$_FILES['imagen']['name'];
+                    $mimetype=$_FILES['imagen']['type'];
 
-                if ($mimetype=="image/jpg" || $mimetype=="image/jpeg" || $mimetype=="image/png" || $mimetype=="image/gif") {
-                    if (!is_dir('uploads/images')) {
-                        mkdir('uploads/images', 0777,true);
+                    if ($mimetype=="image/jpg" || $mimetype=="image/jpeg" || $mimetype=="image/png" || $mimetype=="image/gif") {
+                        if (!is_dir('uploads/images')) {
+                            mkdir('uploads/images', 0777,true);
+                        }
+
+                        $producto->setImagen($filename);
+                        move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
                     }
-
-                    move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
-                    $producto->setImagen($filename);
                 }
+                
+                if (isset($_GET['id'])) {
 
+                    $id= $_GET['id'];
+                    $producto->setId($id);
 
-                $save=$producto->save();
+                    $save=$producto->edit();
+            
+                } else {
+                    $save=$producto->save();
+                }
+                
                 if ($save) {
                     $_SESSION['producto']='complete';
                 }else{
