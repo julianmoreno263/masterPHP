@@ -7,6 +7,10 @@ class PedidoController{
 
         echo 'Controlador Pedidos, acción index';
     }
+
+    public function add(){
+        
+    }
 }
 
 
