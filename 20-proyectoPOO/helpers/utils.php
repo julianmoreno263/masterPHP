@@ -25,6 +25,27 @@ class Utils{
         $categorias=$categoria->getAll();
         return $categorias;
     }
+
+    public static function statsCarrito(){
+
+        $stats=array(
+            'count'=> 0,
+            'total'=>0
+        );
+
+        if (isset($_SESSION['carrito'])) {
+
+            //contamos el total de productos en el carrito
+            $stats['count']=count($_SESSION['carrito']);
+
+            //calculamos el costo total de todos los productos en el carrito
+            foreach ($_SESSION['carrito'] as $producto) {
+                $stats['total'] += $producto['precio']*$producto['unidades'];
+            }
+        }
+
+        return $stats;
+    }
 }
 
 

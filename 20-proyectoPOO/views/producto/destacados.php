@@ -27,7 +27,7 @@
         </a>
         
         <p>30 euros</p>
-        <a href="#" class="button">Comprar</a>
+        <a href="<?=base_url?>carrito/add&id=<?=$product->id?>" class="button">Comprar</a>
     </div>
     
 </div>
