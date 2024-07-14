@@ -6,6 +6,9 @@ class ProductoController{
 
     public function index(){
 
+        $producto=new Producto();
+        $productos=$producto->getRandom(6);
+
         //renderizar vista
         require_once 'views/producto/destacados.php';
     }

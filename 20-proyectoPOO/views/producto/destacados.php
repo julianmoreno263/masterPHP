@@ -1,34 +1,23 @@
 <h1>Productos Destacados</h1>
 
+<?php while($product=$productos->fetch_object()): ?>
+
     <div class="product">
+        
         <a href="<?=base_url?>producto/ver&id=$product->id">
-            <img src="assets/img/camiseta.png" alt="imagen camiseta">
+            <?php if($product->imagen!=null): ?>
+                <img src="<?=base_url?>uploads/images/<?=$product->imagen?>" alt="imagen camiseta">
+            <?php else: ?>
+                <img src="assets/img/camiseta.png" alt="camiseta">
+            <?php endif; ?>
             <h2>Camiseta Azul Ancha</h2>
         </a>
         
         <p>30 euros</p>
         <a href="#" class="button">Comprar</a>
     </div>
+<?php endwhile; ?>
 
-    <div class="product">
-        <a href="<?=base_url?>producto/ver&id=$product->id">
-            <img src="assets/img/camiseta.png" alt="imagen camiseta">
-            <h2>Camiseta Azul Ancha</h2>
-        </a>
-        
-        <p>30 euros</p>
-        <a href="#" class="button">Comprar</a>
-    </div>
-
-    <div class="product">
-        <a href="<?=base_url?>producto/ver&id=$product->id">
-            <img src="assets/img/camiseta.png" alt="imagen camiseta">
-            <h2>Camiseta Azul Ancha</h2>
-        </a>
-        
-        <p>30 euros</p>
-        <a href="<?=base_url?>carrito/add&id=<?=$product->id?>" class="button">Comprar</a>
-    </div>
     
-</div>
+
 
