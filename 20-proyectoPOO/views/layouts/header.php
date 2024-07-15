@@ -23,8 +23,8 @@
     </header>
 
     <!-- menu -->
+    <?php $categorias=Utils::showCategorias()?>
     <nav id="menu">
-        <?php $categorias=Utils::showCategorias()?>
         <ul>
             <li><a href="<?=base_url?>">Inicio</a></li>
 
