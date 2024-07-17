@@ -31,7 +31,11 @@ class PedidoController{
                 $pedido->setCoste($coste);
 
                 $save=$pedido->save();
-                if ($save) {
+
+                //guardar linea pedido
+                $save_linea=$pedido->saveLinea();
+
+                if ($save &&  $save_linea) {
                     $_SESSION['pedido']='complete';
                 }else{
                     $_SESSION['pedido']='failed';
@@ -40,12 +44,28 @@ class PedidoController{
             }else{
                 $_SESSION['pedido']='failed';
             }
-            
+
+            header("Location:" . base_url . 'pedido/confirmado');
 
         }else{
             //redirigir al index
             header("Location:" . base_url);
         }
+    }
+
+    public function confirmado(){
+        
+        if (isset($_SESSION['identity'])) {
+            $identity=$_SESSION['identity'];
+            $pedido=new Pedido();
+            $pedido->setUsuario_id($identity->id);
+            $pedido=$pedido->getOneByUser();
+
+            $pedidoProductos=new Pedido();
+            $productos=$pedidoProductos->getProductsByPedido($pedido->id);
+
+        }
+        require_once 'views/pedido/confirmado.php';
     }
 }
 
