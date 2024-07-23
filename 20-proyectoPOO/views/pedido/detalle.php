@@ -1,10 +1,12 @@
-<?php if(isset($_SESSION['pedido']) && $_SESSION['pedido']=='complete'): ?>
-    <h1>Tu pedido se ha confirmado</h1>
-    <p>Tu pedido ha sido guardado con exito, una vez que realices la transferencia bancaria a la cuenta 45678899ADD con el coste del pedido, sera procesado y enviado</p><br>
+<h1>Detalle del pedido</h1>
 
-    <?php if(isset($pedido)): ?>
+<?php if(isset($pedido)): ?>
+        <h3>Direccion de envio</h3>
+        Provincia: <?=$pedido->provincia; ?><br>
+        Ciudad: <?=$pedido->localidad; ?><br>
+        Direccion: <?=$pedido->direccion; ?><br><br>
+
         <h3>Datos del pedido</h3>
-    
         Numero de pedido: <?=$pedido->id; ?><br>
         Total a pagar: $ <?=$pedido->coste; ?><br>
         Productos:
@@ -17,7 +19,7 @@
                 <th>Unidades</th>
             </tr>
             <?php while($producto=$productos->fetch_object()): ?>
-
+               
                     <tr>
                         <td>
                             <?php if($producto->imagen !=null): ?>
@@ -37,7 +39,3 @@
         </table>
         
     <?php endif; ?>
-    
-<?php elseif(isset($_SESSION['pedido']) && $_SESSION['pedido']!='complete'): ?>
-    <h1>Tu pedido no se ha podido procesar</h1>
-<?php endif; ?>
