@@ -54,13 +54,24 @@ class Utils{
 
         return $stats;
     }
+
+
+    public static function showStatus($status){
+        $value='Pendiente';
+
+        if($status=='confirm'){
+            $value='Pendiente';
+        }elseif ($status=='preparation') {
+            $value='En preparacion';
+        }elseif ($status=='ready') {
+            $value='Preparado para enviar';$status=='ready';
+        }elseif ($status=='sended') {
+            $status=='Enviado';
+        }
+
+        return $value;
+    }
 }
-
-
-
-
-
-
 
 
 

@@ -103,6 +103,37 @@ class PedidoController{
         }
 
     }
+
+    public function gestion(){
+        Utils::isAdmin();
+        $gestion=true;
+
+        $pedido=new Pedido();
+        $pedidos=$pedido->getAll();
+
+        require_once 'views/pedido/misPedidos.php';
+
+    }
+
+    public function estado(){
+        Utils::isAdmin();
+        if (isset($_POST['pedidoId']) && isset($_POST['estado'])) {
+            //recoger datos del form
+            $id=$_POST['pedidoId'];
+            $estado=$_POST['estado'];
+
+            //update del pedido
+            $pedido=new Pedido();
+            $pedido->setId($id);
+            $pedido->setEstado($estado);
+            $pedido->edit();
+
+            header('Location:' . base_url . 'pedido/detalle&id=' . $id);
+
+        }else{
+            header('Location:' . base_url);
+        }
+    }
 }
 
 
