@@ -32,3 +32,23 @@ Route::get('/pelicula/{titulo?}', function ($titulo='El titulo es opcional') {
         'titulo'=>$titulo
     ]);
 });
+
+//ruta con parametros y con condiciones,puedo tener rutas con condiciones,por ejemplo puedo poner una condicion de que el parametro titulo sea un texto en minusculas,si le paso mayusculas no funcionara,o si le paso numeros tampoco
+Route::get('/pelicula2/{titulo}', function ($titulo) {
+    return view('pelicula2',[
+        'titulo'=>$titulo
+    ]);
+})->where([
+    'titulo'=>'[a-z]+'
+]);
+
+
+//si en esta ruta no quiero pasar el $titulo dentro de un array, lo puedo pasar con el metodo with(), y puedo encadenar varios with para pasar parametros.
+Route::get('/listadoPeliculas', function () {
+    $titulo="Listado de peliculas";
+    $listado=['Batman','Spiderman','Gran Torino'];
+
+    return view('peliculas/listado')
+            ->with('titulo',$titulo)
+            ->with('listado',$listado);
+});
