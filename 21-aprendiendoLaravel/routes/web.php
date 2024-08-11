@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PeliculaController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,42 +20,60 @@ Route::get('/', function () {
     echo "<h1>Hola mundo</h1>";
 });
 
+//rutas llamando al metodo en el controlador respectivo, con parametro opcional en la ruta, este parametro se lo voy pasando por la url,por defecto le puedo poner que sea 1.
+Route::get('/pelicula/{pagina?}', [PeliculaController::class,'index']);
+
+//ruta del metodo detalle del controlador PeliculaController
+Route::get('/detalle', [PeliculaController::class,'detalle']);
+
+//ruta que redirige a otra ruta
+Route::get('/redirigir',[PeliculaController::class,'redirigir']);
+
+//ruta para controlador de tipo resource,es un controlador que ya viene con metodos CRUD definidos,se crea con php artisan y el operador --resource, debemos importarlo en este archivo usando el operador use para poder llamarlo.
+Route::resource('/usuario',UsuarioController::class);
+
+
+
+
+
+
+
 //ruta que muestra una vista a la que se le pueden enviar parametros por view
-Route::get('/mostrarFecha', function () {
-    $titulo='Estoy mostrando la fecha';
-    return view('mostrarFecha',[
-        'titulo'=>$titulo
-    ]);
-});
+// Route::get('/mostrarFecha', function () {
+//     $titulo='Estoy mostrando la fecha';
+//     return view('mostrarFecha',[
+//         'titulo'=>$titulo
+//     ]);
+// });
 
-//ruta con parametros dentro {}, si el parametro es opcional le pongo un signo ?
-Route::get('/pelicula/{titulo?}', function ($titulo='El titulo es opcional') {
-    return view('pelicula',[
-        'titulo'=>$titulo
-    ]);
-});
+// //ruta con parametros dentro {}, si el parametro es opcional le pongo un signo ?
+// Route::get('/pelicula/{titulo?}', function ($titulo='El titulo es opcional') {
+//     return view('pelicula',[
+//         'titulo'=>$titulo
+//     ]);
+// });
 
-//ruta con parametros y con condiciones,puedo tener rutas con condiciones,por ejemplo puedo poner una condicion de que el parametro titulo sea un texto en minusculas,si le paso mayusculas no funcionara,o si le paso numeros tampoco
-Route::get('/pelicula2/{titulo}', function ($titulo) {
-    return view('pelicula2',[
-        'titulo'=>$titulo
-    ]);
-})->where([
-    'titulo'=>'[a-z]+'
-]);
+// //ruta con parametros y con condiciones,puedo tener rutas con condiciones,por ejemplo puedo poner una condicion de que el parametro titulo sea un texto en minusculas,si le paso mayusculas no funcionara,o si le paso numeros tampoco
+// Route::get('/pelicula2/{titulo}', function ($titulo) {
+//     return view('pelicula2',[
+//         'titulo'=>$titulo
+//     ]);
+// })->where([
+//     'titulo'=>'[a-z]+'
+// ]);
 
 
-//si en esta ruta no quiero pasar el $titulo dentro de un array, lo puedo pasar con el metodo with(), y puedo encadenar varios with para pasar parametros.
-Route::get('/listadoPeliculas', function () {
-    $titulo="Listado de peliculas";
-    $listado=['Batman','Spiderman','Gran Torino'];
+// //si en esta ruta no quiero pasar el $titulo dentro de un array, lo puedo pasar con el metodo with(), y puedo encadenar varios with para pasar parametros.
+// Route::get('/listadoPeliculas', function () {
+//     $titulo="Listado de peliculas";
+//     $listado=['Batman','Spiderman','Gran Torino'];
 
-    return view('peliculas/listado')
-            ->with('titulo',$titulo)
-            ->with('listado',$listado);
-});
+//     return view('peliculas/listado')
+//             ->with('titulo',$titulo)
+//             ->with('listado',$listado);
+// });
 
-Route::get('/paginaGenerica',function (){
+// Route::get('/paginaGenerica',function (){
 
-    return view('pagina');
-});
+//     return view('pagina');
+// });
