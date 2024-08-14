@@ -24,13 +24,23 @@ Route::get('/', function () {
 Route::get('/pelicula/{pagina?}', [PeliculaController::class,'index']);
 
 //ruta del metodo detalle del controlador PeliculaController
-Route::get('/detalle', [PeliculaController::class,'detalle']);
+Route::get('/detalle/{year?}', [PeliculaController::class,'detalle'])->middleware('TestYear');
 
 //ruta que redirige a otra ruta
 Route::get('/redirigir',[PeliculaController::class,'redirigir']);
 
 //ruta para controlador de tipo resource,es un controlador que ya viene con metodos CRUD definidos,se crea con php artisan y el operador --resource, debemos importarlo en este archivo usando el operador use para poder llamarlo.
 Route::resource('/usuario',UsuarioController::class);
+
+//un middleware es una clase que se usa como filtro para una peticion,por ejemplo en la ruta detalle podemos pasar un parametro year opcional,y dependiendo si este parametro esta presente o no hacemos que por medio del middleware se haga algo especifico, por ejemplo si pasamos en la ruta un year y este es diferente al 2024 pues que me redirija a la pagina de peliculas.En si esto es una funcionalidad para las rutas.
+
+//para que funcione el middleware debemos agregarlo en el archivo Kernel.php donde esta el $middlewareAliases, se le pone un nombre y se le pasa la ruta donde esta el middleware. Despues para usar el middleware en la ruta solo usamos la funcion middleware() y le pasamos el nombre del middleware que registramos.
+
+//ruta para ver el formulario en laravel
+Route::get('/formulario',[PeliculaController::class,'formulario']);
+
+//ruta para recibir los datos que enviamos via post del formulario en laravel
+Route::post('/recibir',[PeliculaController::class,'recibir']);
 
 
 
