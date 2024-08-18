@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PeliculaController;
 use App\Http\Controllers\UsuarioController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrutaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,17 @@ Route::get('/formulario',[PeliculaController::class,'formulario']);
 
 //ruta para recibir los datos que enviamos via post del formulario en laravel
 Route::post('/recibir',[PeliculaController::class,'recibir']);
+
+
+//Rutas para la practica de laravel con MVC y la bd fruteriaMaster
+
+//esta ruta utilizara un prefijo(mas adelante lo vemos bien), en si esto se utiliza para que todas las rutas comienzen con la misma palabra, osea la palabra frutas y despues si la funcion especifica del controlador.Se crea un grupo de rutas para un controlador especifico.
+Route::group(['prefix'=>'frutas'],function(){
+    Route::get('index',[FrutaController::class,'index']);
+    Route::get('detail/{id}',[FrutaController::class,'detail']);
+    Route::get('create',[FrutaController::class,'create']);
+    Route::post('save',[FrutaController::class,'save']);
+});
 
 
 
@@ -87,3 +99,4 @@ Route::post('/recibir',[PeliculaController::class,'recibir']);
 
 //     return view('pagina');
 // });
+;
