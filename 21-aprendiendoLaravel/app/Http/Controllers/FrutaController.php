@@ -35,6 +35,7 @@ class FrutaController extends Controller
     }
 
     //guardar el registro
+    //el with en el return indica una sesion flash(solo aparecen una vez) que la llamamos status y le pasamos un mensaje
     public function save(Request $request){
 
         $fruta=DB::table('frutas')->insert([
@@ -44,7 +45,37 @@ class FrutaController extends Controller
             'fecha'=>$request->input('fecha'),
         ]);
 
-        return redirect('frutas/index');
+        return redirect('frutas/index')->with('status','Fruta creada correctamente');
+
+    }
+
+    //el with en el return indica una sesion flash(solo aparecen una vez) que la llamamos status y le pasamos un mensaje
+    public function delete($id){
+        $fruta=DB::table('frutas')->where('id',$id)->delete();
+        return redirect('frutas/index')->with('status','Fruta borrada correctamente');
+    }
+
+    public function edit($id){
+        //sacar el registro de la bd
+        $fruta=DB::table('frutas')->where('id',$id)->first();
+
+        //pasarle a la vista el objeto y rellenar el formulario
+        return view('fruta/create',[
+            'fruta'=>$fruta
+        ]);
+    }
+
+    public function update(Request $request){
+
+        $id=$request->input('id');
+        $fruta=DB::table('frutas')->where('id',$id)->update([
+            'nombre'=>$request->input('nombre'),
+            'descripcion'=>$request->input('descripcion'),
+            'precio'=>$request->input('precio'),
+            'fecha'=>$request->input('fecha'),
+        ]);
+
+        return redirect('frutas/index')->with('status','Fruta actualizada correctamente');
 
     }
 }

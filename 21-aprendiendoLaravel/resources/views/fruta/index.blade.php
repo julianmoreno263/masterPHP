@@ -6,6 +6,12 @@
 <h1>Listado de frutas</h1>
 <h3><a href="{{action([FrutaController::class,'create'])}}">Crear Fruta</a></h3>
 
+@if (session('status'))
+    <p style="background: green;color:white;width:280px;text-align:center">
+        {{session('status')}}
+    </p>
+@endif
+
 <ul>
     @foreach ($frutas as $fruta)
         <li>

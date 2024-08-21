@@ -2,23 +2,31 @@
     use App\Http\Controllers\FrutaController;
 @endphp
 
-<h1>Crear fruta</h1>
+@if (isset($fruta) && is_object($fruta))
+    <h1>Editar fruta</h1>
+@else
+    <h1>Crear fruta</h1>
+@endif
 
-<form action="{{action([FrutaController::class,'save'])}}" method="post">
+<form action="{{ isset($fruta) ? action([FrutaController::class,'update']) : action([FrutaController::class,'save'])}}" method="post">
+
+    @if (isset($fruta) && is_object($fruta))
+        <input type="hidden" name="id" id="" value="{{$fruta->id}}"/>
+    @endif
 
     @csrf
 
-    <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" id="">
+    <span for="nombre">Nombre</span>
+    <input type="text" name="nombre" id="" value="{{$fruta->nombre ?? ''}}"/>
     <br><br>
-    <label for="descripcion">Descripcion</label>
-    <input type="text" name="descripcion" id="">
+    <span for="descripcion">Descripcion</span>
+    <input type="text" name="descripcion" id="" value="{{$fruta->descripcion ?? '' }}">
     <br><br>
-    <label for="precio">Precio</label>
-    <input type="text" name="precio" id="">
+    <span for="precio">Precio</span>
+    <input type="text" name="precio" id="" value="{{$fruta->precio ?? 0 }}">
     <br><br>
-    <label for="fecha">Fecha</label>
-    <input type="date" name="fecha" id="">
+    <span for="fecha">Fecha</span>
+    <input type="date" name="fecha" id="" value="{{$fruta->fecha ?? '' }}">
     <br><br>
     <input type="submit" value="Guardar">
 </form>
