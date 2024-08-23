@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //relacion One to Many/ de uno a muchos, para poder sacar todas las imagenes de un usuario
+    public function images(){
+        return $this->hasMany('App\Images');
+    }
 }
